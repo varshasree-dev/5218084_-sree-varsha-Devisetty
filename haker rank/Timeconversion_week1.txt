@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+
+void timeConversion(char* s, char* output) {
+    // s format: hh:mm:ssAM or hh:mm:ssPM
+    int hour, min, sec;
+    char meridian[3];
+
+    // Parse input string
+    sscanf(s, "%2d:%2d:%2d%2s", &hour, &min, &sec, meridian);
+
+    // Convert hour based on AM/PM rules
+    if (strcmp(meridian, "AM") == 0) {
+        if (hour == 12) hour = 0;
+    } else {
+        // PM
+        if (hour != 12) hour += 12;
+    }
+
+    // Format output as HH:MM:SS
+    sprintf(output, "%02d:%02d:%02d", hour, min, sec);
+}
+
+int main() {
+    char s[11];
+    char output[9]; // HH:MM:SS + null terminator
+
+    scanf("%10s", s);
+    timeConversion(s, output);
+    printf("%s\n", output);
+
+    return 0;
+}

@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+char* pangrams(char* s) {
+    int seen[26] = {0};
+    int count = 0;
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        if (isalpha(s[i])) {
+            char lower = tolower(s[i]);
+            int index = lower - 'a';
+            if (!seen[index]) {
+                seen[index] = 1;
+                count++;
+            }
+        }
+    }
+
+    return (count == 26) ? "pangram" : "not pangram";
+}
+
+int main() {
+    char input[1001];
+    fgets(input, sizeof(input), stdin);
+
+    // Remove newline character if present
+    input[strcspn(input, "\n")] = '\0';
+
+    printf("%s\n", pangrams(input));
+
+    return 0;
+}

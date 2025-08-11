@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to count the number of valid segments
+int birthday(int s_count, int* s, int d, int m) {
+    int count = 0;
+
+    for (int i = 0; i <= s_count - m; i++) {
+        int sum = 0;
+
+        for (int j = 0; j < m; j++) {
+            sum += s[i + j];
+        }
+
+        if (sum == d) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n; // Number of squares
+    scanf("%d", &n);
+
+    int* s = malloc(n * sizeof(int)); // Allocate memory for chocolate squares
+
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &s[i]); // Read each chocolate square's number
+    }
+
+    int d, m; // Ron's birth day and month
+    scanf("%d %d", &d, &m);
+
+    int result = birthday(n, s, d, m);
+    printf("%d\n", result);
+
+    free(s); // Free allocated memory
+    return 0;
+}

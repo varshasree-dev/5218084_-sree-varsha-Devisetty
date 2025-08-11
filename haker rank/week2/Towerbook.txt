@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int towerBreakers(int n, int m) {
+    // If the height is 1, no moves can be made -> Player 2 wins
+    if (m == 1) 
+        return 2;
+    // If the number of towers is even -> Player 2 wins
+    if (n % 2 == 0) 
+        return 2;
+    // Otherwise Player 1 wins
+    return 1;
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+
+    while (t--) {
+        int n, m;
+        scanf("%d %d", &n, &m);
+        printf("%d\n", towerBreakers(n, m));
+    }
+
+    return 0;
+}

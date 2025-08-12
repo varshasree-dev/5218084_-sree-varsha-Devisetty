@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Compare function for qsort
+int cmpfunc(const void *a, const void *b) {
+    return (*(char*)a - *(char*)b);
+}
+
+int main() {
+    int t;
+    scanf("%d", &t);
+
+    while (t--) {
+        int n;
+        scanf("%d", &n);
+
+        char grid[n][n + 1];  // +1 for null terminator
+
+        // Read grid rows
+        for (int i = 0; i < n; i++) {
+            scanf("%s", grid[i]);
+            // Sort each row
+            qsort(grid[i], n, sizeof(char), cmpfunc);
+        }
+
+        // Check columns
+        int isSorted = 1;
+        for (int col = 0; col < n && isSorted; col++) {
+            for (int row = 1; row < n; row++) {
+                if (grid[row][col] < grid[row - 1][col]) {
+                    isSorted = 0;
+                    break;
+                }
+            }
+        }
+
+        if (isSorted) {
+            printf("YES\n");
+        } else {
+            printf("NO\n");
+        }
+    }
+
+    return 0;
+}

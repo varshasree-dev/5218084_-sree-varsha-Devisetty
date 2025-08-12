@@ -1,0 +1,24 @@
+def is_power_of_two(n):
+    return (n & (n - 1)) == 0
+
+def largest_power_of_two_less_than(n):
+    p = 1
+    while p << 1 < n:
+        p <<= 1
+    return p
+
+def counter_game(n):
+    moves = 0
+    while n != 1:
+        if is_power_of_two(n):
+            n >>= 1  # divide by 2
+        else:
+            n -= largest_power_of_two_less_than(n)
+        moves += 1
+    return "Louise" if moves % 2 == 1 else "Richard"
+
+if __name__ == "__main__":
+    t = int(input())
+    for _ in range(t):
+        n = int(input())
+        print(counter_game(n))

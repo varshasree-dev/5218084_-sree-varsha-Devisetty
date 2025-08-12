@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int superDigitHelper(long long num) {
+    if (num < 10) {
+        return (int)num;
+    }
+
+    long long sum = 0;
+    while (num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    return superDigitHelper(sum);
+}
+
+int superDigit(char* n, int k) {
+    long long initialSum = 0;
+    for (int i = 0; n[i] != '\0'; i++) {
+        initialSum += n[i] - '0';  // Convert char digit to int
+    }
+    initialSum *= k;
+
+    return superDigitHelper(initialSum);
+}
+
+int main() {
+    char n[100001]; // large enough buffer
+    int k;
+
+    scanf("%s %d", n, &k);
+
+    int result = superDigit(n, k);
+    printf("%d\n", result);
+
+    return 0;
+}
